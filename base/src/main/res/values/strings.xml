@@ -1,0 +1,9 @@
+
+<resources>
+    <string name="back">返回</string>
+
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
+    <string name="permission_confirm">权限确认</string>
+    <string name="storage_permission_request">此操作需要授权访问存储的权限</string>
+</resources>
