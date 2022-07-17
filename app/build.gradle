@@ -30,13 +30,13 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.21'
-    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.17'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.10'
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.20'
     implementation('com.github.chrisbanes:PhotoView:2.1.4') {
         exclude group: 'com.android.support'
     }
-    implementation 'com.squareup.okhttp3:okhttp:3.12.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.14.9'
     implementation 'pub.devrel:easypermissions:3.0.0'
     api project(':base')
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'

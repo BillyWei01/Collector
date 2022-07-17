@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.StyleRes;
 
 import com.horizon.doodle.worker.lifecycle.LifeEvent;
-import com.horizon.doodle.worker.lifecycle.LifecycleManager;
+import com.horizon.doodle.worker.lifecycle.LifeManager;
 import com.horizon.doodle.worker.lifecycle.LifeListener;
 
 
@@ -24,20 +24,20 @@ public class BaseDialog extends Dialog implements LifeListener {
     public BaseDialog(@NonNull Activity activity) {
         super(activity);
         hostHash = System.identityHashCode(activity);
-        LifecycleManager.register(hostHash, this);
+        LifeManager.register(hostHash, this);
     }
 
     public BaseDialog(@NonNull Activity activity, @StyleRes int themeResId) {
         super(activity, themeResId);
         hostHash = System.identityHashCode(activity);
-        LifecycleManager.register(hostHash, this);
+        LifeManager.register(hostHash, this);
     }
 
     @Override
     public void dismiss() {
         super.dismiss();
-        LifecycleManager.unregister(hostHash, this);
-        LifecycleManager.notify(this, LifeEvent.DESTROY);
+        LifeManager.unregister(hostHash, this);
+        LifeManager.notify(this, LifeEvent.DESTROY);
     }
 
     @Override

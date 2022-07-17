@@ -4,7 +4,6 @@ package com.horizon.base.ui;
 
 import android.content.Context;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -64,7 +63,7 @@ public abstract class BaseFragment extends Fragment implements Observer {
 
         if (savedInstanceState != null) {
             boolean isSupportHidden = savedInstanceState.getBoolean(STATE_SAVE_IS_HIDDEN);
-            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            FragmentTransaction ft = getParentFragmentManager().beginTransaction();
             if (isSupportHidden) {
                 ft.hide(this);
             } else {
@@ -180,7 +179,7 @@ public abstract class BaseFragment extends Fragment implements Observer {
     }
 
     @Override
-    public void onEvent(int event, @NotNull Object... args) {
+    public void onEvent(int event, Object... args) {
 
     }
 

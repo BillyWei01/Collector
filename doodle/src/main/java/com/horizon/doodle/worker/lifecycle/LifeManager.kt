@@ -3,7 +3,7 @@ package com.horizon.doodle.worker.lifecycle
 import android.util.SparseArray
 
 
-object LifecycleManager {
+object LifeManager {
     private val holders = SparseArray<Holder>()
 
     /**
@@ -18,12 +18,15 @@ object LifecycleManager {
         if (hostHash == 0 || listener == null) {
             return
         }
-        var holder: Holder? = holders.get(hostHash)
+        val holder: Holder? = holders.get(hostHash)
         if (holder == null) {
-            holder = Holder()
-            holders.put(hostHash, holder)
+            Holder().run {
+                add(listener)
+                holders.put(hostHash, this)
+            }
+        } else {
+            holder.add(listener)
         }
-        holder.add(listener)
     }
 
     @JvmStatic

@@ -3,7 +3,7 @@ package com.horizon.doodle
 
 import android.graphics.Bitmap
 import android.net.Uri
-import com.horizon.doodle.worker.lifecycle.LifecycleManager
+import com.horizon.doodle.worker.lifecycle.LifeManager
 import java.io.File
 
 /**
@@ -107,6 +107,6 @@ object Doodle {
      */
     @JvmStatic
     fun notifyEvent(host: Any, event: Int) {
-        LifecycleManager.notify(host, event)
+        LifeManager.notify(host, event)
     }
 }

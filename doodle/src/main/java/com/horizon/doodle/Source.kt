@@ -179,7 +179,7 @@ internal abstract class Source : Closeable {
             if (request.cacheInterceptor != null) {
                 val cacheFile = request.cacheInterceptor!!.cachePath(url)
                 if (cacheFile != null &&
-                        (cacheFile.exists() || Downloader.downloadOnly(url, cacheFile) != null)) {
+                    (cacheFile.exists() || Downloader.downloadOnly(url, cacheFile) != null)) {
                     return valueOf(cacheFile)
                 }
             }
@@ -189,23 +189,23 @@ internal abstract class Source : Closeable {
         @Throws(IOException::class)
         fun parse(request: Request): Source {
             val path = request.path
+            val context = Utils.context
             return when {
                 path.startsWith("http") -> checkCache(request) ?: let {
                     val builder = okhttp3.Request.Builder().url(path)
-                    if (request.diskCacheStrategy and DiskCacheStrategy.SOURCE == 0) {
-                        builder.cacheControl(CacheControl.Builder().noCache().noStore().build())
-                    } else if (request.onlyIfCached) {
-                        builder.cacheControl(CacheControl.FORCE_CACHE)
+                        .cacheControl(CacheControl.Builder().noCache().noStore().build())
+                    if ((request.diskCacheStrategy and DiskCacheStrategy.SOURCE) == 0) {
+                        valueOf(Downloader.getStream(builder.build()))
+                    } else {
+                        valueOf(Downloader.downloadFile(builder.build(), request.onlyIfCached))
                     }
-                    valueOf(Downloader.getSource(builder.build()))
                 }
-                path.startsWith(ASSET_PREFIX) -> valueOf(Utils.context.assets.open(path.substring(ASSET_PREFIX_LENGTH)))
+                path.startsWith(ASSET_PREFIX) -> valueOf(context.assets.open(path.substring(ASSET_PREFIX_LENGTH)))
                 path.startsWith(FILE_PREFIX) -> valueOf(File(path.substring(FILE_PREFIX_LENGTH)))
-                else -> valueOf(Utils.context.contentResolver.openInputStream((request.uri
-                        ?: Uri.parse(path))))
+                else -> valueOf(context.contentResolver.openInputStream((request.uri ?: Uri.parse(path))))
             }
         }
     } // end of companion
-
 }
+
 

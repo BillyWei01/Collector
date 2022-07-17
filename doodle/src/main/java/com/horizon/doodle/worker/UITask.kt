@@ -7,7 +7,7 @@ import android.text.TextUtils
 import android.util.Log
 import com.horizon.doodle.worker.lifecycle.LifeEvent
 import com.horizon.doodle.worker.lifecycle.LifeListener
-import com.horizon.doodle.worker.lifecycle.LifecycleManager
+import com.horizon.doodle.worker.lifecycle.LifeManager
 import java.util.concurrent.*
 import java.util.concurrent.atomic.AtomicBoolean
 
@@ -253,7 +253,7 @@ abstract class UITask<Params, Progress, Result> : LifeListener {
      * set task's host
      *
      * @param host may be one of Activity, Fragment or Dialog
-     * @see LifecycleManager.register
+     * @see LifeManager.register
      */
     fun host(host: Any): UITask<Params, Progress, Result> {
         return hostHash(System.identityHashCode(host))
@@ -261,13 +261,13 @@ abstract class UITask<Params, Progress, Result> : LifeListener {
 
     fun hostHash(hostHash: Int): UITask<Params, Progress, Result> {
         this.mHostHash = hostHash
-        LifecycleManager.register(hostHash, this)
+        LifeManager.register(hostHash, this)
         return this
     }
 
     private fun detachHost() {
         if (mHostHash != 0) {
-            LifecycleManager.unregister(mHostHash, this)
+            LifeManager.unregister(mHostHash, this)
         }
     }
 

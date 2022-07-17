@@ -14,7 +14,7 @@ import android.view.WindowManager
 import android.widget.ImageView
 import com.horizon.doodle.worker.LogProxy
 import com.horizon.doodle.worker.lifecycle.LifeEvent
-import com.horizon.doodle.worker.lifecycle.LifecycleManager
+import com.horizon.doodle.worker.lifecycle.LifeManager
 import java.io.*
 
 internal object Utils {
@@ -42,11 +42,11 @@ internal object Utils {
             }
 
             override fun onActivityResumed(activity: Activity) {
-                LifecycleManager.notify(activity, LifeEvent.SHOW)
+                LifeManager.notify(activity, LifeEvent.SHOW)
             }
 
             override fun onActivityPaused(activity: Activity) {
-                LifecycleManager.notify(activity, LifeEvent.HIDE)
+                LifeManager.notify(activity, LifeEvent.HIDE)
             }
 
             override fun onActivityStopped(activity: Activity) {
@@ -56,7 +56,7 @@ internal object Utils {
             }
 
             override fun onActivityDestroyed(activity: Activity) {
-                LifecycleManager.notify(activity, LifeEvent.DESTROY)
+                LifeManager.notify(activity, LifeEvent.DESTROY)
             }
         })
     }
