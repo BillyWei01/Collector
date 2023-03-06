@@ -3,6 +3,10 @@ Collector是一个简单的图片浏览，收藏，下载APP，整体功能简�
 
 本项目集成了作者其他的开源组件 [Doodle](https://github.com/BillyWei01/Doodle) 以及 [FastKV](https://github.com/BillyWei01/FastKV)。
 
+备注：<br>
+花瓣网改版了，项目中当前获取图片信息的代码失效了，目前暂不可用。<br>
+先说明一下，改天更新好了再上传。
+
 
 # 效果图
 ![](image/s1.jpg)
